@@ -9,11 +9,10 @@ import PriceTag from './PriceTag';
  * @param {Object} props.lowest - Lowest price object {platform, price}
  */
 export default function ComparisonTable({ prices, lowest }) {
-  const platforms = ['amazon', 'flipkart', 'croma', 'reliance', 'vijaysales'];
+  const platforms = ['amazon', 'flipkart',  'reliance', 'vijaysales'];
   const platformLabels = {
     amazon: 'Amazon',
     flipkart: 'Flipkart',
-    croma: 'Croma',
     reliance: 'Reliance Digital',
     vijaysales: 'Vijay Sales',
   };

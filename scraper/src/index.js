@@ -6,13 +6,15 @@
 require('dotenv').config();
 const cron = require('node-cron');
 
-const CromaScraper = require('./scrapers/croma');
 const AmazonScraper = require('./scrapers/amazon');
 const FlipkartScraper = require('./scrapers/flipkart');
+const RelianceScraper = require('./scrapers/reliance');
+const VijaySalesScraper = require('./scrapers/vijaysales');
 
-const croma = new CromaScraper();
 const amazon = new AmazonScraper();
 const flipkart = new FlipkartScraper();
+const reliance = new RelianceScraper();
+const vijaysales = new VijaySalesScraper();
 
 // Default queries to refresh periodically
 const DEFAULT_QUERIES = [
@@ -38,15 +40,18 @@ async function runSingleScraper(platform, query) {
   console.log(`[SYSTEM] Starting scraper for [${platform.toUpperCase()}] with query "${query}"`);
   try {
     switch (platform.toLowerCase()) {
-      case 'croma':
-        await croma.scrape(query);
-        break;
       case 'amazon':
         await amazon.scrape(query);
         break;
       case 'flipkart':
         await flipkart.scrape(query);
         break;
+      case 'reliance':
+        await reliance.scrape(query);
+        break;
+      case 'vijaysales':
+        await vijaysales.scrape(query);
+         break;
       default:
         console.error(`[SYSTEM] Unknown platform: ${platform}`);
     }
@@ -67,7 +72,7 @@ async function scrapeQuery(query, targetPlatform = 'all') {
   console.log(`============================================================`);
   
   const platforms = targetPlatform === 'all' 
-    ? ['croma', 'amazon', 'flipkart'] 
+    ? [ 'amazon', 'flipkart','reliance','vijaysales'] 
     : [targetPlatform];
 
   for (let i = 0; i < platforms.length; i++) {
